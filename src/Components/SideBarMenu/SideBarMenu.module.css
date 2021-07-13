@@ -1,0 +1,8 @@
+.SideBarItemsList {
+    width: 320px;
+    /*width: 16.7%;*/
+
+    position: absolute;
+    top: 82px;
+    left: 2.6%;
+}

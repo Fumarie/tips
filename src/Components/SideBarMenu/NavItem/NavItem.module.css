@@ -1,0 +1,33 @@
+.NavItem {
+    height: 90px;
+    width: 100%;
+    padding-left: 50px;
+    align-items: center;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    font-family: SF Pro Display;
+}
+
+.NavItem span {
+    position: relative;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+
+.active {
+    background-color: white;
+    border-radius: 780px;
+}
+
+.active span {
+    color: black;
+}
+
+
+.NavItem img {
+    margin-right: 10px;
+}

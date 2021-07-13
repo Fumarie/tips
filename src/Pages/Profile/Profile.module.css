@@ -1,0 +1,23 @@
+.maintitleundertext {
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.inputsWraper {
+    margin-top: 50px;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.inputHeader {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 29px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+}

@@ -1,0 +1,12 @@
+.container {
+    margin-left: 280px;
+
+    margin-top: 26px;
+    margin-right: 10px;
+
+    background-color: #fff;
+    border-radius: 60px;
+    padding: 60px 90px 130px 70px;
+
+    min-height: 80vh;
+}
