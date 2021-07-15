@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from './userAvatar.svg'
+import Avatar from '../../../Images/userAvatar.svg'
 import classes from './Profile.module.css'
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ const Profile = () => {
 
     return (
         <NavLink className={classes.profile} to={'/profile'}>
-            <p>{user.fullName}</p>
+            <p>{user.fullName ? user.fullName : "Anonymous user"}</p>
             <img src={Avatar} alt="Avatar" className={classes.Avatar}/>
         </NavLink>
     );

@@ -6,9 +6,12 @@ import image1 from './images/Frame 17.svg'
 import image2 from './images/Frame 18.svg'
 import image3 from './images/Cards.svg'
 import TextInput from "../../Components/Main/TextInput";
+import {useSelector} from "react-redux";
+import {RootState} from "../../redux/store";
 
 
 const Main = () => {
+    const {user} = useSelector((state: RootState) => state.user)
     return (
         <div>
             <MainTitle text="Get tips"/>
@@ -17,11 +20,11 @@ const Main = () => {
             </span>
             <div className={classes.mainWrap}>
                 <div style={{width: '40%'}}>
-                    <QRCard/>
+                    <QRCard />
                     <div className={classes.Link}>
                         <p className={classes.LinkTitle}>Link on payment page</p>
                         <div style={{marginTop: '15px'}}>
-                            <TextInput text={'https://eazytips.com/pay/516345'} />
+                            <TextInput text={`https://eazytips.ml/pay/${user.id}`} />
                         </div>
                     </div>
                 </div>

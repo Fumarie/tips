@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "tips-db9a6"
+    "default": "tips-db9a6",
+    "tips": "tips-db9a6"
   }
 }

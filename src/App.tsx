@@ -8,20 +8,45 @@ import Transactions from "./Pages/Transactions";
 import Invite from "./Pages/Invite";
 import Cards from "./Pages/Cards";
 import About from "./Pages/About";
-import {useDispatch} from "react-redux";
-import { getUser } from './redux/userSlice';
+import {useDispatch, useSelector} from "react-redux";
 import Profile from './Pages/Profile';
+import LoginPage from "./Pages/Login/LoginPage";
+import {RootState} from './redux/store';
+import {setAuth} from './redux/authSlice';
+import PayPage from "./Pages/PayPage";
 
 const App: React.FC = () => {
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getUser(30))
+    useEffect(()  => {
+        const storageId = Number(localStorage.getItem('tipsId'))
+        if (storageId) {
+            dispatch(setAuth(storageId))
+        }
+        // eslint-disable-next-line
     }, []);
+
+    const {id} = useSelector((state: RootState) => state.auth)
+
+    if (!id) return (
+        <div className={styles.App}>
+            <div className={styles.AppWrap}>
+                <Router>
+                    <Switch>
+                        <Route path="/login" exact component={LoginPage}/>
+                        <Route path="/register" exact component={LoginPage}/>
+                        <Route path="/pay/:id" exact component={PayPage} />
+                        <Redirect to="/login"/>
+                    </Switch>
+                </Router>
+            </div>
+        </div>
+    )
 
     return (
         <div className={styles.App}>
-            <div className={styles.container}>
+            <div className={styles.AppWrap}>
+                <div style={{display: 'none'}}>{id}</div>
                 <Router>
                     <Switch>
                         <Route path="/" exact>
@@ -46,19 +71,20 @@ const App: React.FC = () => {
                         </Route>
                         <Route path="/cards" exact>
                             <MainLayout link="cards">
-                                <Cards />
+                                <Cards/>
                             </MainLayout>
                         </Route>
                         <Route path="/about" exact>
                             <MainLayout link="about">
-                                <About />
+                                <About/>
                             </MainLayout>
                         </Route>
                         <Route path="/profile" exact>
                             <MainLayout link="profile">
-                                <Profile />
+                                <Profile/>
                             </MainLayout>
                         </Route>
+                        <Route path="/pay/:id" exact component={PayPage} />
                         <Redirect to="/"/>
                     </Switch>
                 </Router>

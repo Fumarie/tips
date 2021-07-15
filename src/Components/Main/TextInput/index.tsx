@@ -8,7 +8,7 @@ interface TextInputProps {
 const TextInput:FC<TextInputProps> = ({text}) => {
     return (
         <input className={classes.input} type="text" readOnly={true}
-               value={text ? text : 'Loading...'}/>
+               value={text ? text : 'No data yet'}/>
     );
 };
 

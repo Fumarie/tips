@@ -2,13 +2,13 @@ import {createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { DOMAIN } from '../constaint'
 
-interface userInterface {
-    id: number
+export interface userInterface {
+    id: number | null
     name: string | null
     password: null
     email: string | null
     phone: string | null
-    isAdmin: 1 | 0
+    isAdmin: 1 | 0 | null
     fullName: string | null
 }
 
@@ -18,12 +18,12 @@ interface userStateInterface {
 
 const initialState: userStateInterface = {
     user: {
-        id: 30,
+        id: null,
         name: null,
         password: null,
         email: null,
         phone: null,
-        isAdmin: 0,
+        isAdmin: null,
         fullName: null
     }
 }
@@ -32,10 +32,7 @@ export const getUser = createAsyncThunk(
     'user/getUser',
     async (id: number) => {
         const url = `${DOMAIN}/api/user/${id}`
-        // const url = 'https://jsonplaceholder.typicode.com/todos/1'
-        console.log(url)
         const response = await axios.get(url)
-        console.log(response.data)
         return response.data;
     }
 )
@@ -52,6 +49,6 @@ export const userSlice = createSlice({
     },
 })
 
-// export const {} = magazineSlice.actions;
+// export const {} = userSlice.actions;
 
 export default userSlice.reducer;
