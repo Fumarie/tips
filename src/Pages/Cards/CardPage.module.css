@@ -14,6 +14,7 @@
     padding: 21px 25px 31px;
 }
 
+
 .CardInner {
     width: 100%;
     height: 100%;
@@ -47,6 +48,18 @@
     letter-spacing: 0.2em;
     margin-bottom: 21px;
 }
+
+@media (max-width: 700px) {
+    .Card {
+        width: 290px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .CardNumber {
+        font-size: 16px;
+    }
+}
+
 
 .CardValidThru {
     font-size: 16px;

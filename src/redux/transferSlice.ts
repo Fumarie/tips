@@ -5,11 +5,13 @@ import { DOMAIN } from '../constaint'
 interface transferStateInterface {
     error: string
     success: boolean | null
+    loading: boolean
 }
 
 const initialState: transferStateInterface = {
     error: '',
-    success: null
+    success: null,
+    loading: false
 }
 
 interface IPayTipsData {
@@ -21,6 +23,7 @@ interface IPayTipsData {
 export const payTips = createAsyncThunk(
     'transfer/payTips',
     async (data: IPayTipsData, thunkAPI) => {
+        thunkAPI.dispatch(setLoading(true))
         try {
             const url = `${DOMAIN}/api/transaction/tip`
             const response = await axios.post(url, {...data})
@@ -34,6 +37,8 @@ export const payTips = createAsyncThunk(
             thunkAPI.dispatch(setError())
             if (!e.response) throw e
             return thunkAPI.rejectWithValue(e.response.data)
+        } finally {
+            thunkAPI.dispatch(setLoading(false))
         }
     }
 )
@@ -42,6 +47,9 @@ export const transferSlice = createSlice({
     name: 'transfer',
     initialState,
     reducers: {
+        setLoading(state, action){
+            state.loading = action.payload
+        },
         setError(state) {
             state.error = 'Unexpected error'
             state.success = false
@@ -59,6 +67,6 @@ export const transferSlice = createSlice({
     },
 })
 
-export const { setError, clearError } = transferSlice.actions;
+export const { setLoading, setError, clearError } = transferSlice.actions;
 
 export default transferSlice.reducer;

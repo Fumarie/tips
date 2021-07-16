@@ -17,6 +17,7 @@
     }
     .formWrapper {
         padding: 0 40px 50px;
+        border-radius: 0;
     }
 }
 

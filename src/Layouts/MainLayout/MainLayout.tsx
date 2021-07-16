@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getUser} from "../../redux/userSlice";
 import {RootState} from "../../redux/store";
 import Logo from '../../Components/Header/Logo';
-import BurgerMenu from "../../Components/MobileHeader/BurgerMenu";
+import BurgerMenu from "../../Components/Main/BurgerMenu";
 
 interface MainLayoutProps {
     link: string;

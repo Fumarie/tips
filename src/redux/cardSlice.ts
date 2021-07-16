@@ -14,7 +14,7 @@ export interface cardInterface {
 
 interface cardsStateInterface {
     cards: cardInterface[]
-    loading: true | false
+    loading: boolean
 }
 
 const initialState: cardsStateInterface = {
@@ -26,9 +26,16 @@ export const getCards = createAsyncThunk(
     'card/getCards',
     async (userId: number, thunkAPI) => {
         thunkAPI.dispatch(setLoading(true))
-        const url = `${DOMAIN}/api/card/${userId}`
-        const response = await axios.get<cardInterface[]>(url)
-        return response.data;
+        try {
+            const url = `${DOMAIN}/api/card/${userId}`
+            const response = await axios.get<cardInterface[]>(url)
+            return response.data;
+        } catch (e) {
+            if (!e.response) throw e
+            return thunkAPI.rejectWithValue(e.response.data)
+        } finally {
+            thunkAPI.dispatch(setLoading(false))
+        }
     }
 )
 
@@ -45,10 +52,6 @@ export const cardSlice = createSlice({
         builder
             .addCase(getCards.fulfilled, (state, action) => {
                 state.cards = action.payload
-                state.loading = false
-            })
-            .addCase(getCards.rejected, (state) => {
-                state.loading = false
             })
     },
 })

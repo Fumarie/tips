@@ -3,11 +3,11 @@ import {navLinks} from '../../SideBarMenu';
 import {INavLink} from '../../SideBarMenu/NavLinkInterface';
 import {Link} from 'react-router-dom';
 import './Hamburger.css'
+import Profile from '../../Header/Profile';
 
 
 const BurgerMenu = () => {
     const [openMenu, setOpenMenu] = useState(false)
-
     return (
         <div>
             <button onClick={() => setOpenMenu(!openMenu)} className="ham">
@@ -19,6 +19,7 @@ const BurgerMenu = () => {
                 </span>}
             </button>
             <ul className={!openMenu ? 'menu' : 'menu showMenu'}>
+                <li onClick={() => setOpenMenu(false)}><Profile type={'white'} /></li>
                 {navLinks.map((link: INavLink) => <li key={link.name} onClick={() => setOpenMenu(false)}><Link to={link.path}
                                                                                    className="menuLink">{link.name}</Link></li>)}
             </ul>

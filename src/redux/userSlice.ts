@@ -13,7 +13,7 @@ export interface userInterface {
 
 interface userStateInterface {
     user: userInterface
-    loading: true | false
+    loading: boolean
 }
 
 const initialState: userStateInterface = {
@@ -32,9 +32,17 @@ export const getUser = createAsyncThunk(
     'user/getUser',
     async (id: number, thunkApi) => {
         thunkApi.dispatch(setLoading(true))
-        const url = `${DOMAIN}/api/user/${id}`
-        const response = await axios.get<userInterface>(url)
-        return response.data;
+        try {
+            const url = `${DOMAIN}/api/user/${id}`
+            const response = await axios.get<userInterface>(url)
+            return response.data;
+        } catch (e) {
+            if (!e.response) throw e
+            return thunkApi.rejectWithValue(e.response.data)
+        }
+        finally {
+            thunkApi.dispatch(setLoading(false))
+        }
     }
 )
 
@@ -50,10 +58,6 @@ export const userSlice = createSlice({
         builder
             .addCase(getUser.fulfilled, (state, action) => {
                 state.user = action.payload
-                state.loading = false
-            })
-            .addCase(getUser.rejected, (state, action) => {
-                state.loading = false
             })
     },
 })

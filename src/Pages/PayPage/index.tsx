@@ -7,6 +7,7 @@ import {getUser} from '../../redux/userSlice';
 import {RootState} from "../../redux/store";
 import {useState} from 'react';
 import {clearError, payTips} from "../../redux/transferSlice";
+import Loader from '../../Components/Loader';
 
 
 const PayPage: FC = (props: any) => {
@@ -32,26 +33,36 @@ const PayPage: FC = (props: any) => {
         return amount.length > 0
     }
 
-    const {user} = useSelector((state: RootState) => state.user)
+    const {user, loading} = useSelector((state: RootState) => state.user)
 
     const Pay = () => {
         if (user.id)
             dispatch(payTips({userId: user.id, amount: Number(amount), comment: commentText}))
     }
 
-    const {success, error} = useSelector((state: RootState) => state.transfer)
+    const transfer = useSelector((state: RootState) => state.transfer)
 
     const closeInfoMessage = () => {
         dispatch(clearError())
     }
 
-    if (success !== null)
+    if(loading || transfer.loading) return (
+        <div className={classes.MainPayWrap}>
+            <div className={classes.PayWrap}>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <Loader />
+                </div>
+            </div>
+        </div>
+    )
+
+    if (transfer.success !== null)
         return (
             <div className={classes.MainPayWrap}>
                 <div className={classes.PayWrap}>
-                    {success === false ?
+                    {transfer.success === false ?
                         <div className={classes.infoMessage}>
-                            <p>Error: {error}.</p>
+                            <p>Error: {transfer.error}.</p>
                             <p>Please, try again.</p>
                             <button onClick={closeInfoMessage}>Okay</button>
                         </div> :
