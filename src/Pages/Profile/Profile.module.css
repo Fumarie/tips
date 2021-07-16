@@ -7,11 +7,17 @@
 
 .inputsWraper {
     margin-top: 50px;
-    width: 50%;
+    width: 40%;
     height: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+}
+
+@media (max-width: 1150px) {
+    .inputsWraper {
+        width: 100%;
+    }
 }
 
 .inputHeader {

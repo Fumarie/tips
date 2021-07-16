@@ -3,6 +3,28 @@
     justify-content: space-between;
 }
 
+.ss {
+    max-width: 410px;
+    min-width: 310px;
+}
+
+@media (max-width: 1150px) {
+    .mainWrap {
+        flex-direction: column;
+        margin: 0 auto;
+    }
+
+    .CardLinkWrap {
+        margin: 0 auto;
+    }
+
+    .ss {
+        margin: 0 auto;
+        min-width: 150px;
+    }
+}
+
+
 .Link {
     margin-top: 55px;
 }
@@ -14,7 +36,7 @@
 }
 
 .input {
-    width: 80%;
+    width: 100%;
     border: 1px solid #000000;
     box-sizing: border-box;
     border-radius: 10px;
@@ -22,8 +44,22 @@
     font-size: 18px;
 }
 
+.HowWrap {
+    margin-left: 30px;
+}
+
+@media(max-width: 1150px) {
+    .HowWrap {
+        margin-left: 0;
+        margin-top: 50px;
+    }
+
+}
+
 .List {
     margin-top: 40px;
+    display: flex;
+    flex-direction: column;
 }
 
 .ListItem {
@@ -38,7 +74,13 @@
     align-items: center;
 }
 
-    .ImageTextWrap {
+@media (max-width: 750px) {
+    .ImageWrap {
+        width: 75px;
+    }
+}
+
+.ImageTextWrap {
     margin-left: 40px;
     display: flex;
     align-items: center;

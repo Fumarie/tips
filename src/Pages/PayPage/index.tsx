@@ -35,9 +35,8 @@ const PayPage: FC = (props: any) => {
     const {user} = useSelector((state: RootState) => state.user)
 
     const Pay = () => {
-        console.log('Pay')
         if (user.id)
-            dispatch(payTips({id: user.id, amount: Number(amount), comment: commentText}))
+            dispatch(payTips({userId: user.id, amount: Number(amount), comment: commentText}))
     }
 
     const {success, error} = useSelector((state: RootState) => state.transfer)

@@ -8,12 +8,12 @@ export interface userInterface {
     password: null
     email: string | null
     phone: string | null
-    isAdmin: 1 | 0 | null
     fullName: string | null
 }
 
 interface userStateInterface {
     user: userInterface
+    loading: true | false
 }
 
 const initialState: userStateInterface = {
@@ -23,16 +23,17 @@ const initialState: userStateInterface = {
         password: null,
         email: null,
         phone: null,
-        isAdmin: null,
         fullName: null
-    }
+    },
+    loading: false
 }
 
 export const getUser = createAsyncThunk(
     'user/getUser',
-    async (id: number) => {
+    async (id: number, thunkApi) => {
+        thunkApi.dispatch(setLoading(true))
         const url = `${DOMAIN}/api/user/${id}`
-        const response = await axios.get(url)
+        const response = await axios.get<userInterface>(url)
         return response.data;
     }
 )
@@ -40,15 +41,23 @@ export const getUser = createAsyncThunk(
 export const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {},
+    reducers: {
+        setLoading(state, action) {
+            state.loading = action.payload
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getUser.fulfilled, (state, action) => {
                 state.user = action.payload
+                state.loading = false
+            })
+            .addCase(getUser.rejected, (state, action) => {
+                state.loading = false
             })
     },
 })
 
-// export const {} = userSlice.actions;
+export const { setLoading } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -16,13 +16,13 @@ import aboutIconBlack from "./navIcons/Info Circle-black.svg"
 
 import classes from "./SideBarMenu.module.css"
 
-const navLinks: Array<INavLink> = [
+export const navLinks: Array<INavLink> = [
     {name: 'Get tips', icon: getTipsIcon, iconBlack: getTipsIconBlack, path: ''},
-    {name: 'Dashboard', icon: dashboardIcon, iconBlack: dashboardIconBlack, path: 'dashboard'},
-    {name: 'Transactions history', icon: transactionsIcon, iconBlack: transactionsIconBlack, path: 'transactions'},
-    {name: 'Invite friend', icon: inviteIcon, iconBlack: inviteIconBlack, path: 'invite'},
     {name: 'Cards', icon: cardsIcon, iconBlack: cardsIconBlack, path: 'cards'},
-    {name: 'About', icon: aboutIcon, iconBlack: aboutIconBlack, path: 'about'}
+    {name: 'Transactions', icon: transactionsIcon, iconBlack: transactionsIconBlack, path: 'transactions'},
+    {name: 'Dashboard', icon: dashboardIcon, iconBlack: dashboardIconBlack, path: 'dashboard'},
+    {name: 'Invite friend', icon: inviteIcon, iconBlack: inviteIconBlack, path: 'invite'},
+    // {name: 'About', icon: aboutIcon, iconBlack: aboutIconBlack, path: 'about'}
 ]
 
 interface SideBarMenuProps {

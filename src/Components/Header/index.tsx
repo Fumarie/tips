@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import Logo from "./Logo";
 import Profile from "./Profile";
+import classes from "./Header.module.css"
 
 const Header: FC = () => {
     return (
-        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '32px 10px 0'}}>
+        <div className={classes.header}>
             <Logo />
             <Profile />
         </div>

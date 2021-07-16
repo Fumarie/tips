@@ -8,30 +8,40 @@ import image3 from './images/Cards.svg'
 import TextInput from "../../Components/Main/TextInput";
 import {useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
+import Loader from "../../Components/Loader";
 
 
 const Main = () => {
-    const {user} = useSelector((state: RootState) => state.user)
+    const {user, loading} = useSelector((state: RootState) => state.user)
+
+    if(loading) return (
+        <div style={{display: 'flex', justifyContent: 'center', marginTop: '100px'}}>
+            <Loader/>
+        </div>
+    )
+
     return (
         <div>
-            <MainTitle text="Get tips"/>
-            <span style={{marginLeft: '30%'}}>
-                <MainTitle text="How to use"/>
-            </span>
             <div className={classes.mainWrap}>
-                <div style={{width: '40%'}}>
-                    <QRCard />
-                    <div className={classes.Link}>
-                        <p className={classes.LinkTitle}>Link on payment page</p>
-                        <div style={{marginTop: '15px'}}>
-                            <TextInput text={`https://eazytips.ml/pay/${user.id}`} />
+                <div className={classes.ss}>
+                    <MainTitle text="Get tips"/>
+                    <div className={classes.CardLinkWrap}>
+                        <QRCard/>
+                        <div className={classes.Link}>
+                            <p className={classes.LinkTitle}>Link on payment page</p>
+                            <div style={{marginTop: '15px'}}>
+                                <TextInput text={`https://eazytips.ml/pay/${user.id}`}/>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className={classes.HowWrap}>
+                    <MainTitle text="How to use"/>
                     <ul className={classes.List}>
                         <li className={classes.ListItem}>
-                            <p className={classes.ListIndex}>1</p>
+                            <div>
+                                <p className={classes.ListIndex}>1</p>
+                            </div>
                             <div className={classes.ImageTextWrap}>
                                 <div className={classes.ImageWrap}>
                                     <img src={image1} alt=""/>
@@ -40,7 +50,9 @@ const Main = () => {
                             </div>
                         </li>
                         <li className={classes.ListItem}>
-                            <p className={classes.ListIndex}>2</p>
+                            <div>
+                                <p className={classes.ListIndex}>2</p>
+                            </div>
                             <div className={classes.ImageTextWrap}>
                                 <div className={classes.ImageWrap}>
                                     <img src={image2} alt=""/>
@@ -49,7 +61,9 @@ const Main = () => {
                             </div>
                         </li>
                         <li className={classes.ListItem}>
-                            <p className={classes.ListIndex}>3</p>
+                            <div>
+                                <p className={classes.ListIndex}>3</p>
+                            </div>
                             <div className={classes.ImageTextWrap}>
                                 <div className={classes.ImageWrap}>
                                     <img src={image3} alt=""/>

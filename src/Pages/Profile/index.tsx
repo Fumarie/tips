@@ -1,12 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import MainTitle from "../../Components/Main/MainTitle";
 import TextInput from "../../Components/Main/TextInput";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from '../../redux/store';
 import classes from './Profile.module.css'
+import Loader from "../../Components/Loader";
+import {getUser} from "../../redux/userSlice";
 
 const Profile = () => {
-    const {user} = useSelector((state: RootState) => state.user)
+    const dispatch = useDispatch()
+    const {id} = useSelector((state: RootState) => state.auth)
+
+    useEffect(() => {
+        if(id)
+            dispatch(getUser(id))
+    }, []);
+
+
+    const {user, loading} = useSelector((state: RootState) => state.user)
+
+    if(loading) return (
+        <div style={{display: 'flex', justifyContent: 'center', marginTop: '100px'}}>
+            <Loader/>
+        </div>
+    )
+
     return (
         <div style={{height: '100%'}}>
             <MainTitle text={'Profile'}/>

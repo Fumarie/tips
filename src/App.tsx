@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './App.module.css';
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import MainLayout from './Layouts/MainLayout/MainLayout';
@@ -14,19 +14,35 @@ import LoginPage from "./Pages/Login/LoginPage";
 import {RootState} from './redux/store';
 import {setAuth} from './redux/authSlice';
 import PayPage from "./Pages/PayPage";
+import {getUser} from "./redux/userSlice";
+import Loader from "./Components/Loader";
 
 const App: React.FC = () => {
     const dispatch = useDispatch()
 
-    useEffect(()  => {
-        const storageId = Number(localStorage.getItem('tipsId'))
-        if (storageId) {
-            dispatch(setAuth(storageId))
+    useEffect(() => {
+        function checkAuth() {
+            const storageId = Number(localStorage.getItem('tipsId'))
+            console.log(storageId)
+            if (storageId) {
+                dispatch(setAuth(storageId))
+                dispatch(getUser(storageId))
+            } else {
+                dispatch(setAuth(0))
+            }
         }
+
+        checkAuth();
         // eslint-disable-next-line
     }, []);
 
     const {id} = useSelector((state: RootState) => state.auth)
+
+    if(id === null) return (
+        <div style={{display: 'flex', justifyContent: 'center', paddingTop: '40vh'}}>
+            <Loader/>
+        </div>
+    )
 
     if (!id) return (
         <div className={styles.App}>
@@ -35,7 +51,7 @@ const App: React.FC = () => {
                     <Switch>
                         <Route path="/login" exact component={LoginPage}/>
                         <Route path="/register" exact component={LoginPage}/>
-                        <Route path="/pay/:id" exact component={PayPage} />
+                        <Route path="/pay/:id" exact component={PayPage}/>
                         <Redirect to="/login"/>
                     </Switch>
                 </Router>
@@ -84,7 +100,7 @@ const App: React.FC = () => {
                                 <Profile/>
                             </MainLayout>
                         </Route>
-                        <Route path="/pay/:id" exact component={PayPage} />
+                        <Route path="/pay/:id" exact component={PayPage}/>
                         <Redirect to="/"/>
                     </Switch>
                 </Router>

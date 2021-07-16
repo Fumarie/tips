@@ -13,7 +13,7 @@ const initialState: transferStateInterface = {
 }
 
 interface IPayTipsData {
-    id: number
+    userId: number
     amount: number
     comment: string | null
 }
@@ -22,7 +22,7 @@ export const payTips = createAsyncThunk(
     'transfer/payTips',
     async (data: IPayTipsData, thunkAPI) => {
         try {
-            const url = `${DOMAIN}/api/transaction/${data.id}`
+            const url = `${DOMAIN}/api/transaction/tip`
             const response = await axios.post(url, {...data})
             if (response.status === 200) {
                 console.log(response)

@@ -8,6 +8,16 @@
     padding: 0 70px 50px;
     background-color: #fff;
     border-radius: 50px;
+    max-width: 100%;
+}
+
+@media (max-width: 700px) {
+    .loginContainer {
+        padding-top: 30vh;
+    }
+    .formWrapper {
+        padding: 0 40px 50px;
+    }
 }
 
 .buttonsWrap {

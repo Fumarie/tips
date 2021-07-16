@@ -1,8 +1,24 @@
 .SideBarItemsList {
     width: 320px;
-    /*width: 16.7%;*/
-
     position: absolute;
     top: 82px;
     left: 2.6%;
+}
+
+@media (max-width: 1500px) {
+    .SideBarItemsList {
+        width: 250px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .SideBarItemsList {
+        width: 180px;
+    }
+}
+
+@media (max-width: 700px) {
+    .SideBarItemsList {
+        display: none;
+    }
 }
