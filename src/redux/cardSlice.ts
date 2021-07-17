@@ -46,6 +46,9 @@ export const cardSlice = createSlice({
     reducers: {
         setLoading(state, action) {
             state.loading = action.payload
+        },
+        clearCards(state) {
+            state.cards = []
         }
     },
     extraReducers: (builder) => {
@@ -56,6 +59,6 @@ export const cardSlice = createSlice({
     },
 })
 
-export const { setLoading } = cardSlice.actions;
+export const { setLoading, clearCards } = cardSlice.actions;
 
 export default cardSlice.reducer;

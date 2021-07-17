@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import styles from './App.module.css';
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import MainLayout from './Layouts/MainLayout/MainLayout';
@@ -21,24 +21,20 @@ const App: React.FC = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        function checkAuth() {
-            const storageId = Number(localStorage.getItem('tipsId'))
-            console.log(storageId)
-            if (storageId) {
-                dispatch(setAuth(storageId))
-                dispatch(getUser(storageId))
-            } else {
-                dispatch(setAuth(0))
-            }
+        const storageId = Number(localStorage.getItem('tipsId'))
+        console.log(storageId)
+        if (storageId) {
+            dispatch(setAuth(storageId))
+            // dispatch(getUser(storageId))
+        } else {
+            dispatch(setAuth(0))
         }
-
-        checkAuth();
         // eslint-disable-next-line
     }, []);
 
     const {id} = useSelector((state: RootState) => state.auth)
 
-    if(id === null) return (
+    if (id === null) return (
         <div style={{display: 'flex', justifyContent: 'center', paddingTop: '40vh'}}>
             <Loader/>
         </div>

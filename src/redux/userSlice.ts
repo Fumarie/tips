@@ -11,9 +11,23 @@ export interface userInterface {
     fullName: string | null
 }
 
+interface userEditInterface {
+    id: number
+    fieldName: string
+    value: userEditValueInterface
+}
+
+interface userEditValueInterface {
+    name?: string
+    email?: string
+    fullName?: string
+}
+
 interface userStateInterface {
     user: userInterface
     loading: boolean
+    editLoading: any
+    editError: any
 }
 
 const initialState: userStateInterface = {
@@ -25,7 +39,9 @@ const initialState: userStateInterface = {
         phone: null,
         fullName: null
     },
-    loading: false
+    loading: false,
+    editLoading: false,
+    editError: ''
 }
 
 export const getUser = createAsyncThunk(
@@ -40,8 +56,26 @@ export const getUser = createAsyncThunk(
             if (!e.response) throw e
             return thunkApi.rejectWithValue(e.response.data)
         }
+    }
+)
+
+export const editUser = createAsyncThunk(
+    'user/editUser',
+    async (data: userEditInterface, {dispatch, rejectWithValue}) => {
+        dispatch(setEditLoading({[data.fieldName]: true}))
+        try {
+            const url = `${DOMAIN}/api/user/edit`
+            const field = data.fieldName
+            const object = {id: data.id, [field]: Object.keys(data.value)[0]}
+            await axios.put(url, object)
+            if(field === 'fullName')
+                dispatch(setFullName(Object.keys(data.value)[0]))
+        } catch (e) {
+            if (!e.response) throw e
+            return rejectWithValue(e.response.data)
+        }
         finally {
-            thunkApi.dispatch(setLoading(false))
+            dispatch(setEditLoading(false))
         }
     }
 )
@@ -52,16 +86,34 @@ export const userSlice = createSlice({
     reducers: {
         setLoading(state, action) {
             state.loading = action.payload
+        },
+        setEditLoading(state, action) {
+            state.editLoading = action.payload
+        },
+        setFullName(state, action) {
+            state.user.fullName = action.payload
+        },
+        clearEditError(state, action) {
+            const fieldName =  action.payload
+            console.log(fieldName)
+            if(typeof state.editError === "object" && state.editError.errors)
+                delete state.editError.errors[`${fieldName}`]
         }
     },
     extraReducers: (builder) => {
         builder
             .addCase(getUser.fulfilled, (state, action) => {
                 state.user = action.payload
+                state.loading = false
+            })
+            .addCase(editUser.rejected, (state, action) => {
+                console.log(action)
+                state.editError = action.payload
+                state.loading = false
             })
     },
 })
 
-export const { setLoading } = userSlice.actions;
+export const { setLoading, setEditLoading, setFullName, clearEditError } = userSlice.actions;
 
 export default userSlice.reducer;

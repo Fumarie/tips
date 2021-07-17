@@ -3,15 +3,17 @@ import MainTitle from "../../Components/Main/MainTitle";
 import Card from "../../Components/Main/Card";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
-import {cardInterface, getCards} from "../../redux/cardSlice";
+import {cardInterface, clearCards, getCards} from "../../redux/cardSlice";
 import Loader from "../../Components/Loader";
 
 const Cards = () => {
     const dispatch = useDispatch()
     const {cards, loading} = useSelector((state: RootState) => state.card)
     const {id} = useSelector((state: RootState) => state.auth)
+
     useEffect(() => {
         if(id) dispatch(getCards(id))
+        return () => {dispatch(clearCards())}
         // eslint-disable-next-line
     }, []);
 

@@ -6,7 +6,12 @@ import {cardInterface} from "../../../redux/cardSlice";
 
 
 const Card: FC<cardInterface> = (props) => {
-    console.log(props)
+    const date: Array<string> = props.valid.split('.')
+    const mounth: string = date[1]
+    const year: Array<string> = date[2].split('')
+    const shortYear: string = `${year[2]}${year[3]}`
+    const validThru: string = `${mounth}/${shortYear}`
+
     return (
         <div className={classes.Card}>
             <div className={classes.CardInner}>
@@ -17,7 +22,7 @@ const Card: FC<cardInterface> = (props) => {
                 <div className={classes.CardBalance}>{props.virtual ? props.balance +'₽' : <div style={{height: '29px'}}></div>}</div>
                 <p className={classes.CardNumber}>{props.number}</p>
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <p className={classes.CardValidThru}>11/24</p>
+                    <p className={classes.CardValidThru}>{validThru}</p>
                     <img src={visa} alt="visa"/>
                 </div>
             </div>

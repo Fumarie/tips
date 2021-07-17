@@ -11,8 +11,6 @@ import inviteIcon from "./navIcons/Send.svg"
 import inviteIconBlack from "./navIcons/Send-black.svg"
 import cardsIcon from "./navIcons/Wallet.svg"
 import cardsIconBlack from "./navIcons/Wallet-black.svg"
-import aboutIcon from "./navIcons/Info Circle.svg"
-import aboutIconBlack from "./navIcons/Info Circle-black.svg"
 
 import classes from "./SideBarMenu.module.css"
 
