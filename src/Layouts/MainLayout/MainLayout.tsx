@@ -7,6 +7,7 @@ import {getUser} from "../../redux/userSlice";
 import {RootState} from "../../redux/store";
 import Logo from '../../Components/Header/Logo';
 import BurgerMenu from "../../Components/Main/BurgerMenu";
+import classNames from "classnames";
 
 interface MainLayoutProps {
     link: string;
@@ -23,13 +24,13 @@ const MainLayout: FC<MainLayoutProps> = ({children, link}) => {
 
     return (
         <div className={classes.container}>
-        <Header/>
+        <Header link={link}/>
             <SideBarMenu link={link}/>
             <div className={classes.mobileHeader}>
                 <Logo type='black' />
                 <BurgerMenu />
             </div>
-            <div className={classes.wrap}>
+            <div className={classNames(classes.wrap, {[classes.wrapActive]: link === 'profile'})}>
                 {children}
             </div>
         </div>

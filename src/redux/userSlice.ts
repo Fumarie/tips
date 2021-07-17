@@ -98,7 +98,8 @@ export const userSlice = createSlice({
             console.log(fieldName)
             if(typeof state.editError === "object" && state.editError.errors)
                 delete state.editError.errors[`${fieldName}`]
-        }
+        },
+        clearUser: () => initialState
     },
     extraReducers: (builder) => {
         builder
@@ -114,6 +115,6 @@ export const userSlice = createSlice({
     },
 })
 
-export const { setLoading, setEditLoading, setFullName, clearEditError } = userSlice.actions;
+export const { setLoading, setEditLoading, setFullName, clearEditError, clearUser } = userSlice.actions;
 
 export default userSlice.reducer;

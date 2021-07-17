@@ -1,13 +1,26 @@
 .profile {
+    cursor: pointer;
     display: flex;
     align-items: center;
-
 }
 
 .profile p {
     margin-right: 13px;
-    font-size: 18px;
+    font-size: 20px;
     color: #fff;
+}
+
+.profileActive {
+    justify-content: flex-end;
+    background: white;
+    padding: 25px 0 15px 32px;
+    margin-right: -60px;
+    margin-bottom: -1px;
+    border-radius: 100px 100px 100px 0px;
+}
+
+.profileActive p {
+    color: black;
 }
 
 .Avatar {
@@ -15,4 +28,13 @@
     height: 50px;
     border-radius: 36px;
     border: 1px solid #fff;
+}
+
+.AvatarActive {
+    border-color: black;
+}
+
+.Logout {
+    margin-left: 20px;
+    margin-right: 25px;
 }

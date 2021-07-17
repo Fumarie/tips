@@ -2,12 +2,18 @@ import React, { FC } from 'react';
 import Logo from "./Logo";
 import Profile from "./Profile";
 import classes from "./Header.module.css"
+import classNames from "classnames";
 
-const Header: FC = () => {
+interface HeaderProps {
+    link?: string
+}
+
+const Header: FC<HeaderProps> = ({link}) => {
+    console.log(link)
     return (
-        <div className={classes.header}>
+        <div className={classNames(classes.header, {[classes.headerActive]: link === 'profile'})}>
             <Logo />
-            <Profile />
+                <Profile link={link} />
         </div>
     );
 };
