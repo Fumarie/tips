@@ -14,7 +14,6 @@ import LoginPage from "./Pages/Login/LoginPage";
 import {RootState} from './redux/store';
 import {setAuth} from './redux/authSlice';
 import PayPage from "./Pages/PayPage";
-import {getUser} from "./redux/userSlice";
 import Loader from "./Components/Loader";
 
 const App: React.FC = () => {
@@ -25,7 +24,6 @@ const App: React.FC = () => {
         console.log(storageId)
         if (storageId) {
             dispatch(setAuth(storageId))
-            // dispatch(getUser(storageId))
         } else {
             dispatch(setAuth(0))
         }

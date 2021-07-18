@@ -55,6 +55,8 @@ export const getUser = createAsyncThunk(
         } catch (e) {
             if (!e.response) throw e
             return thunkApi.rejectWithValue(e.response.data)
+        } finally {
+            thunkApi.dispatch(setEditLoading(false))
         }
     }
 )

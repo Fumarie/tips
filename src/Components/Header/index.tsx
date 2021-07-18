@@ -9,9 +9,8 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({link}) => {
-    console.log(link)
     return (
-        <div className={classNames(classes.header, {[classes.headerActive]: link === 'profile'})}>
+        <div className={classNames(classes.header)}>
             <Logo />
                 <Profile link={link} />
         </div>

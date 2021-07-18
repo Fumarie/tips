@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Avatar from '../../../Images/userAvatar.svg'
 import AvatarWhite from '../../../Images/userAvatar-white.svg'
 import classes from './Profile.module.css'
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { RootState } from '../../../redux/store';
 import classNames from "classnames";
@@ -24,7 +24,7 @@ const Profile:FC<ProfileProps> = ({type, link}) => {
         history.push('/login')
         dispatch(clearAuth())
         dispatch(clearUser())
-        // localStorage.removeItem('tipsId')
+        localStorage.removeItem('tipsId')
     }
 
     return (

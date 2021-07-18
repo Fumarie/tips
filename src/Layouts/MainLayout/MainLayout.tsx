@@ -23,7 +23,7 @@ const MainLayout: FC<MainLayoutProps> = ({children, link}) => {
     }, []);
 
     return (
-        <div className={classes.container}>
+        <div className={classNames(classes.container, {[classes.containerActive]: link === 'profile'})}>
         <Header link={link}/>
             <SideBarMenu link={link}/>
             <div className={classes.mobileHeader}>
