@@ -1,1 +1,1 @@
-export const DOMAIN = "https://c344c334f88b.ngrok.io"
+export const DOMAIN = "https://b8c9eec28cad.ngrok.io"

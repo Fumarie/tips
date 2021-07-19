@@ -34,7 +34,7 @@ const Profile = () => {
             <p className={classes.maintitleundertext}>Customise your profile</p>
             <div className={classes.inputsWraper}>
                 <p className={classes.inputHeader}>The name that your guest sees</p>
-                {user.name ? <TextInput name={'name'} text={user.name} editable/> : <TextInput text={'Anonymous user'} />}
+                {user.name ? <TextInput name={'name'} text={user.name} editable/> : <TextInput name={'name'} editable text={'Anonymous user'} />}
                 <p className={classes.inputHeader}>Fullname</p>
                 <TextInput name={'fullName'} text={user.fullName} editable/>
                 <p className={classes.inputHeader}>Email</p>
